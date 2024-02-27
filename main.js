@@ -36,8 +36,7 @@ function babble() {
     brownNoise2.loop = true;
     brownNoise2.start;
 
-    // Low-pass filters
-    // Create filters with descriptive names
+
     const lowPassFilter1 = audioCtx.createBiquadFilter();
     lowPassFilter1.type = 'lowpass';
     lowPassFilter1.frequency.value = 400; // Cutoff frequency
@@ -46,19 +45,19 @@ function babble() {
     lowPassFliter2.type = 'lowpass';
     lowPassFliter2.frequency.value = 14; // Cutoff frequency
 
-    // Combine gain and offset into a single operation
+    //add 500 gain for filter 2
     const modulationGain = audioCtx.createGain();
-    modulationGain.gain.value = 500; // Add 500
+    modulationGain.gain.value = 500;
 
-    // Create resonant high-pass filter with clear variable naming
+    //resonant highpass
     const resonantHighPassFilter = audioCtx.createBiquadFilter();
     resonantHighPassFilter.type = 'highpass';
     resonantHighPassFilter.Q.value = 1 / 0.03; // Q value directly
 
+    //set gain for rhp
     const resonantHighPassFilterGain = audioCtx.createGain();
     resonantHighPassFilterGain.gain.value = 0.1;
 
-    // Connect the audio graph using descriptive connections
     brownNoise1.connect(lowPassFilter1);
     lowPassFilter1.connect(resonantHighPassFilter);
     resonantHighPassFilter.connect(resonantHighPassFilterGain);
